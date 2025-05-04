@@ -1,8 +1,4 @@
-Great choice! Here's your updated, **unique and stylish `README.md`** with the AI assistant now named **"NILA"** instead of Jarvis.
 
----
-
-```markdown
 <h1 align="center">✨ NILA – AI Voice Assistant</h1>
 
 <p align="center">
@@ -145,7 +141,3 @@ Free to use and modify for educational and personal projects.
 
 ---
 
-```
-
-Let me know if you'd like a **custom logo for NILA** or a **GitHub banner image** too!
-```
