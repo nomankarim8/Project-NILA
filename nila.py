@@ -7,6 +7,8 @@ import webbrowser
 
 
 
+
+
 # Initialize OpenAI
 openai.api_key = api_data
 
