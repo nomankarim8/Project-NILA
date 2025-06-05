@@ -8,6 +8,7 @@
   <img src="https://img.shields.io/badge/OpenAI-GPT3.5-informational?style=for-the-badge&logo=openai">
   <img src="https://img.shields.io/badge/SpeechRecognition-Enabled-success?style=for-the-badge">
 </p>
+
 ---
 
 ## 📌 Overview
