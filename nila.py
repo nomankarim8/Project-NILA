@@ -16,6 +16,7 @@ def get_reply(question):
         max_tokens=200,
         stop=["User:"]
     )
+    
     answer = response.choices[0].text.strip()
     return answer
 
