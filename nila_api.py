@@ -4,6 +4,7 @@ import openai
 from apikey import api_data
 
 
+
 # Initialize Flask
 app = Flask(__name__)
 CORS(app)
