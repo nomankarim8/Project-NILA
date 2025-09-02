@@ -85,7 +85,7 @@ Start the voice assistant:
 
 ```bash
 python nila.py
-```
+``` 
 
 Then just speak naturally. Try these:
 
