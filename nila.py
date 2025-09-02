@@ -18,6 +18,7 @@ def get_reply(question):
         stop=["User:"]
     )
     
+    
     answer = response.choices[0].text.strip()
     return answer
 
