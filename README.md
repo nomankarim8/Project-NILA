@@ -108,7 +108,7 @@ NILA: Black holes are extremely dense points in space...
 This prompt format makes the AI act like a friendly helper.
 
 ---
-
+ 
 ## 🌟 Features to Explore
 
 ✅ GPT-powered responses
