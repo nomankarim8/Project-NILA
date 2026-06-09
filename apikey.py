@@ -1,2 +1,2 @@
-api_data="Your API Key"
- 
+import os
+API_KEY = os.getenv("OPENAI_API_KEY")
