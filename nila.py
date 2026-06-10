@@ -34,7 +34,7 @@ def speak(text):
 
 # Welcome message
 speak("Hello! I'm NILA, your personal AI assistant. How can I help you today?")
-
+ 
 # Listen for voice input
 def take_command():
     recognizer = sr.Recognizer()
