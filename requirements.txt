@@ -1,0 +1,6 @@
+openai>=1.0.0
+pyttsx3
+SpeechRecognition
+flask
+flask-cors
+pytest

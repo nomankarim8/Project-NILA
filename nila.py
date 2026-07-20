@@ -3,13 +3,18 @@ import webbrowser
 import pyttsx3
 import speech_recognition as sr
 from openai import OpenAI
-from apikey import api_data
+from apikey import get_api_key
 
-client = OpenAI(api_key=api_data or os.getenv("OPENAI_API_KEY"))
+API_KEY = get_api_key()
+client = OpenAI(api_key=API_KEY) if API_KEY else None
 
 
 def get_reply(question):
+    if not API_KEY:
+        return "OpenAI API key is not set. Please add your key to apikey.py or the OPENAI_API_KEY environment variable."
+
     try:
+        assert client is not None
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[

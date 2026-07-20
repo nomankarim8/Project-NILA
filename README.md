@@ -17,10 +17,11 @@
 
 **NILA** is your AI-powered voice companion that:
 
-- 🎧 Listens to your voice
+- 🎧 Listens to your voice when microphone support is available
 - 🤖 Thinks using GPT-3.5
-- 🗣️ Talks back using realistic speech
+- 🗣️ Talks back using speech synthesis
 - 🌐 Responds to voice commands like “Open Google” or “Open YouTube”
+- 💬 Falls back to text input if the microphone or speech service is unavailable
 
 A beginner-friendly AI assistant made entirely with **Python**.
 
@@ -45,7 +46,7 @@ nila-ai/
 Install the required libraries with pip:
 
 ```bash
-pip install openai pyttsx3 SpeechRecognition flask flask-cors
+pip install -r requirements.txt
 ```
 
 To use microphone input:

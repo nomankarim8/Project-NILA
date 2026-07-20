@@ -1,30 +1,30 @@
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import openai
-from apikey import api_data
+from openai import OpenAI
+from apikey import get_api_key
 
-# Initialize Flask
 app = Flask(__name__)
 CORS(app)
 
-# OpenAI API Key
-openai.api_key = api_data or os.getenv("OPENAI_API_KEY")
+API_KEY = get_api_key()
+client = OpenAI(api_key=API_KEY) if API_KEY else None
 
-# AI Response Function
+
 def get_nila_reply(question):
-    messages = [
-        {"role": "system", "content": "You are NILA, a friendly AI assistant."},
-        {"role": "user", "content": question}
-    ]
+    if not API_KEY:
+        raise RuntimeError("OpenAI API key is not set.")
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=messages,
+        messages=[
+            {"role": "system", "content": "You are NILA, a friendly AI assistant."},
+            {"role": "user", "content": question},
+        ],
         max_tokens=200,
-        temperature=0.7
+        temperature=0.7,
     )
-    return response.choices[0].message["content"].strip()
+    return response.choices[0].message.content.strip()
 
 # API Route
 @app.route('/nila', methods=['POST'])
