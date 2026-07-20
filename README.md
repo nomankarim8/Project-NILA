@@ -45,8 +45,8 @@ nila-ai/
 Install the required libraries with pip:
 
 ```bash
-pip install openai pyttsx3 SpeechRecognition
-````
+pip install openai pyttsx3 SpeechRecognition flask flask-cors
+```
 
 To use microphone input:
 

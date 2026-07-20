@@ -1,46 +1,48 @@
+import os
 import openai
 from apikey import api_data
 import pyttsx3
 import speech_recognition as sr
 import webbrowser
 
- 
-# Initialize OpenAI
-openai.api_key = api_data
+# Initialize OpenAI API key from environment or apikey.py
+openai.api_key = api_data or os.getenv("OPENAI_API_KEY")
 
 # Function to get AI response
 def get_reply(question):
-    prompt = f"User: {question}\nNILA:"
-    response = openai.Completion.create(
-        engine="text-davinci-003",  # Use a newer, more capable model
-        prompt=prompt,
+    messages = [
+        {"role": "system", "content": "You are NILA, a friendly AI assistant."},
+        {"role": "user", "content": question}
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
         max_tokens=200,
-        stop=["User:"]
+        temperature=0.7
     )
-    
-    
-    answer = response.choices[0].text.strip()
-    return answer
+
+    return response.choices[0].message["content"].strip()
 
 # Initialize Text-to-Speech
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[0].id)  # Use default voice
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+engine.setProperty("rate", 170)
+
 
 def speak(text):
     print(f"NILA: {text}")
     engine.say(text)
     engine.runAndWait()
 
-# Welcome message
-speak("Hello! I'm NILA, your personal AI assistant. How can I help you today?")
- 
 # Listen for voice input
 def take_command():
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
-        print("🎤 Listening...")
         recognizer.pause_threshold = 1
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        print("🎤 Listening...")
         audio = recognizer.listen(source)
 
     try:
@@ -55,6 +57,8 @@ def take_command():
 
 # Main loop
 if __name__ == '__main__':
+    speak("Hello! I'm NILA, your personal AI assistant. How can I help you today?")
+
     while True:
         query = take_command()
         if not query:

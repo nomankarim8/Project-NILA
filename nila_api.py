@@ -1,26 +1,30 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 from apikey import api_data
-
 
 # Initialize Flask
 app = Flask(__name__)
 CORS(app)
 
 # OpenAI API Key
-openai.api_key = api_data
+openai.api_key = api_data or os.getenv("OPENAI_API_KEY")
 
 # AI Response Function
 def get_nila_reply(question):
-    prompt = f"User: {question}\nNILA:"
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
+    messages = [
+        {"role": "system", "content": "You are NILA, a friendly AI assistant."},
+        {"role": "user", "content": question}
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages,
         max_tokens=200,
-        stop=["User:"]
+        temperature=0.7
     )
-    return response.choices[0].text.strip()
+    return response.choices[0].message["content"].strip()
 
 # API Route
 @app.route('/nila', methods=['POST'])
