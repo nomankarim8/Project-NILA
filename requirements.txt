@@ -4,3 +4,4 @@ SpeechRecognition
 flask
 flask-cors
 pytest
+pyaudio; sys_platform == 'win32'

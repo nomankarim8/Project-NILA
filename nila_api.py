@@ -26,6 +26,26 @@ def get_nila_reply(question):
     )
     return response.choices[0].message.content.strip()
 
+
+@app.route('/')
+def home():
+    return jsonify({"message": "NILA web API is running"})
+
+
+@app.route('/nila', methods=['POST'])
+def nila_api():
+    data = request.get_json(silent=True) or {}
+    question = data.get("question", "")
+
+    if not question:
+        return jsonify({"error": "No question provided"}), 400
+
+    try:
+        reply = get_nila_reply(question)
+        return jsonify({"reply": reply})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+
 # API Route
 @app.route('/nila', methods=['POST'])
 def nila_api():

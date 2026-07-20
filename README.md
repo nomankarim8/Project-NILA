@@ -86,7 +86,19 @@ Start the voice assistant:
 
 ```bash
 python nila.py
-``` 
+```
+
+Start the GUI version:
+
+```bash
+python -c "from nila import launch_gui; launch_gui()"
+```
+
+Start the web app:
+
+```bash
+python nila_api.py
+```
 
 Then just speak naturally. Try these:
 
